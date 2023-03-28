@@ -9,13 +9,13 @@ const createDogDb = async (name, height, weight, life_span, image, temper) => {
         image,
     })
 
-    let temperament = await Temper.findAll({
+    let temperament = await Temper.findAll({        //busca en la tabla Temper y devuelve el que coinsida con la clausula where
         where:{
-            name:temper
+            name:temper,
         }, attributes:['id','name']
     })
 
-    await dog.addTemper(temperament)
+    await dog.addTemper(temperament)            // asocia el temperamento al perro  y devuelve el perro completo
     return dog
 
 }

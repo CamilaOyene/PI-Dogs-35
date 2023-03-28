@@ -4,41 +4,43 @@ const { createDogDb } = require('../controllers/dogsController/postDogController
 
 
 const getDogsHandler = async (req, res) => {
-    const name = req.query
+    const { name } = req.query
+    const response = await getAllDogs();
+    let dogByName = await searchName(name)
     try {
         if (name) {
-            const dogByName = await searchName(name)
-            res.status(200).json(dogByName);
+            if (dogByName.length > 0) {
+                res.json(dogByName);
+            }
         } else {
-            const response = await getAllDogs();
-            res.status(200).json(response);
+            res.json(response);
         }
     } catch (error) {
-        res.status(400).json({error:error.message});
+        res.status(404).json({ error: error.message });
     }
 };
 
 
 const getDetailHandler = async (req, res) => {
     const { id } = req.params;
-    const source = inNan(id) ? 'bdd' : 'api';
-
+    let dogById = await getDogById(id)
     try {
-        const response = await getDogById(id, source);
-        res.status(200).json(response)
+        if (dogById) {
+            res.json(dogById)
+        }
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(404).json({ error: error.message })
 
     }
 }
 
 const createDogsHandler = async (req, res) => {
-    const {name, height, weight, life_span, image,temper} = req.body;
+    const { name, height, weight, life_span, image, temper } = req.body;
     try {
-        const response = await createDogDb(name, height, weight, life_span, image, temper);
-        res.status(200).json(response);
+        let response = await createDogDb(name, height, weight, life_span, image, temper);
+        res.status(201).send(response);
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(404).json({ error: error.message })
     }
 }
 

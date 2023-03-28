@@ -4,7 +4,7 @@ const { API_KEY } = process.env
 
 const allTemper = async () => {
     const data = await axios(`https://api.thedogapi.com/v1/breeds/?api_key=${API_KEY}`)
-    const response = await data.data.map(t.temperament).join('').split(', ')
+    const response = await data.data.map(t => t.temperament).join('').split(', ')
     const arrTemper = response.sort();
 
     const allTemperament = []
@@ -20,9 +20,9 @@ const allTemper = async () => {
 const createTemperDb = async () => {
     let temperByApi = await allTemper()
 
-    temperByApi.forEach(temper => {
+    temperByApi.forEach(tempers => {
         Temper.findOrCreate({
-            where: { name: temper }
+            where: { name: tempers }
         })
     })
     return temperByApi
