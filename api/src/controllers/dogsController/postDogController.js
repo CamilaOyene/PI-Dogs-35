@@ -7,6 +7,7 @@ const createDogDb = async (name, height, weight, life_span, image, temper) => {
         weight,
         life_span,
         image,
+        createDb:true,
     })
 
     let temperament = await Temper.findAll({        //busca en la tabla Temper y devuelve el que coinsida con la clausula where

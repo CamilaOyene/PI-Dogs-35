@@ -3,7 +3,7 @@ const { getAllDogs, searchName } = require('../controllers/dogsController/getDog
 const { createDogDb } = require('../controllers/dogsController/postDogController.js');
 
 
-const getDogsHandler = async (req, res) => {
+const getDogsHandler = async (req, res, next) => {
     const { name } = req.query
     const response = await getAllDogs();
     let dogByName = await searchName(name)
@@ -11,12 +11,18 @@ const getDogsHandler = async (req, res) => {
         if (name) {
             if (dogByName.length > 0) {
                 res.json(dogByName);
+            }else{
+                res.status(404).send(`Error 404. No se encuentran datos para la raza ${name}`)
             }
         } else {
-            res.json(response);
+            if(response){
+                 res.status(200).send(response)
+            }else{
+                res.status(404).send('Error 404. Perros no encontrados.')
+            }
         }
     } catch (error) {
-        res.status(404).json({ error: error.message });
+        next('Error en handler getDogshandler/name', error)
     }
 };
 
@@ -26,11 +32,12 @@ const getDetailHandler = async (req, res) => {
     let dogById = await getDogById(id)
     try {
         if (dogById) {
-            res.json(dogById)
+            res.status(200).send(dogById)
+        }else{
+            res.status(404).send('Error 404. No se encontraron datos para el id.')
         }
     } catch (error) {
-        res.status(404).json({ error: error.message })
-
+        next('Error en handler getDetailHandler', error)
     }
 }
 
@@ -40,7 +47,7 @@ const createDogsHandler = async (req, res) => {
         let response = await createDogDb(name, height, weight, life_span, image, temper);
         res.status(201).send(response);
     } catch (error) {
-        res.status(404).json({ error: error.message })
+        next('Error en createDogsHandler', error)
     }
 }
 

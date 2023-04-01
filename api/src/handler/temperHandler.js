@@ -1,12 +1,12 @@
 const {getTempDb}=require('../controllers/temperController/getTemperController');
 
-const getTemperHandler= async(req,res) =>{
+const getTemperHandler= async(req,res, next) =>{
     try {
         const response = await getTempDb();
         res.status(200).json(response)
         
 } catch (error) {
-    res.status(400).json({error: error.message})
+    next('error en getTemperHandler', error)
 }
 }
 module.exports={getTemperHandler}
