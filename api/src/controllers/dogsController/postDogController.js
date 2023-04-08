@@ -1,23 +1,28 @@
 const { Dog, Temper } = require('../../db.js');
+const { getTempDb } = require('../temperController/getTemperController.js')
 
-const createDogDb = async (name, height, weight, life_span, image, temper) => {
+const createDogDb = async (name, heightMin,heightMax, weightMin,weightMax, life_span, image, tempers) => {
     let dog= await Dog.create({
         name,
-        height,
-        weight,
+        heightMin,
+        heightMax,
+        weightMin,
+        weightMax,
         life_span,
         image,
         createDb:true,
     })
-
+    await getTempDb()
+    
     let temperament = await Temper.findAll({        //busca en la tabla Temper y devuelve el que coinsida con la clausula where
         where:{
-            name:temper,
-        }, attributes:['id','name']
+            id:tempers,
+        },attributes:['id','name']
     })
 
     await dog.addTemper(temperament)            // asocia el temperamento al perro  y devuelve el perro completo
-    return dog
+    
+    return 'Creado exitosamente'
 
 }
 

@@ -13,7 +13,7 @@ export default function App() {
         <Route exact path='/' element= {<LandingPage />} />
         <Route path='/home' element= {<Home />} />
         <Route path='/home/:id' element= {<Detail />} />
-        {/* <Route path='/post' element= {<CreateDog />} /> */}
+        <Route path='/post' element= {<CreateDog />} />
       </Routes>
     </BrowserRouter>
   );

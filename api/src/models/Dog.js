@@ -18,16 +18,24 @@ module.exports = (sequelize) => {
       type:DataTypes.TEXT,
       allowNull:false
     },
-    height: {
+    heightMin: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    weight: {
+    heightMax: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    weightMin: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    weightMax: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     life_span: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull:false,
     },
     createDb: {

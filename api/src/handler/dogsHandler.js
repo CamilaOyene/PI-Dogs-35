@@ -27,14 +27,14 @@ const getDogsHandler = async (req, res, next) => {
 };
 
 
-const getDetailHandler = async (req, res) => {
+const getDetailHandler = async (req, res, next) => {
     const { id } = req.params;
     let dogById = await getDogById(id)
     try {
         if (dogById) {
             res.status(200).send(dogById)
         }else{
-            res.status(404).send('Error 404. No se encontraron datos para el id.')
+            res.status(404).send('Error 404. No esta disponible.')
         }
     } catch (error) {
         next('Error en handler getDetailHandler', error)
@@ -42,12 +42,13 @@ const getDetailHandler = async (req, res) => {
 }
 
 const createDogsHandler = async (req, res) => {
-    const { name, height, weight, life_span, image, temper } = req.body;
+    const datos = req.body;
     try {
-        let response = await createDogDb(name, height, weight, life_span, image, temper);
-        res.status(201).send(response);
+        let response = await createDogDb(datos.name, datos.heightMin,datos.heightMax, datos.weightMin, datos.weightMax, datos.life_span, datos.image, datos.tempers);
+        console.log(response)
+       return res.status(201).send(response);
     } catch (error) {
-        next('Error en createDogsHandler', error)
+        console.log('Error en createDogsHandler', error)
     }
 }
 

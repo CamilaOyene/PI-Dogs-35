@@ -40,7 +40,8 @@ export default function Home() {
             </nav>
 
             <Filtros
-            setCurrentPage={setCurrentPage}/>
+            setCurrentPage={setCurrentPage}
+            currentDogs={currentDogs}/>
 
             <SearchBar />
             <div className='pages'>
@@ -52,6 +53,7 @@ export default function Home() {
                 <Cards
                     currentDogs={currentDogs}
                     error={error}
+                    setCurrentPage={setCurrentPage}
                 />
                 <Paginado
                     dogsPerPage={dogsPerPage}

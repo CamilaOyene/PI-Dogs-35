@@ -13,26 +13,30 @@ const getDogsApi = async () => {
             id: dog.id,
             name: dog.name,
             image: dog.image.url,
-            weight: dog.weight.metric,
-            height: dog.height.metric,
+            weightMin: dog.weight.metric.slice(0, 2).replace(" ", ""),
+            weightMax: dog.weight.metric.slice(4).replace(" ", ""),
+            heightMin: dog.height.metric.slice(0, 2).replace(" ", ""),
+            heightMax: dog.height.metric.slice(4).replace(" ", ""),
             life_span: dog.life_span,
-            tempers: dog.temperament ? dog.temperament : 'Sin temperamentos',
+            tempers: dog.temperament ? dog.temperament : 'Sin temperamentos'
         }
     })
     return response
 }
 
 const getDbDogs = async () => {
-    return await Dog.findAll({   //traigo los perros de la BD con su modelo Temper
+    let dogsInDb = await Dog.findAll({   //traigo los perros de la BD con su modelo Temper
         include: {
             model: Temper,
-            attributes: ['id', 'name'],
+            attributes: ['name'],
             through: {
                 attributes: []
             }
         }
     })
+    return dogsInDb
 }
+
 
 const getAllDogs = async () => {
     let dataApi = await getDogsApi();
@@ -41,25 +45,25 @@ const getAllDogs = async () => {
     return dataT;
 }
 
-const getDogsByNameDb = async(name)=>{
-    try{
-    let dogsByName= await Dog.findAll({
-        where: {            //estoy buscando un perro por su nombre en BD con la where clausula 
-            name:{
-                [Op.iLike]: '%' + name + '%'
+const getDogsByNameDb = async (name) => {
+    try {
+        let dogsByName = await Dog.findAll({
+            where: {            //estoy buscando un perro por su nombre en BD con la where clausula 
+                name: {
+                    [Op.iLike]: '%' + name + '%'
+                }
+            },
+            include: {
+                model: Temper,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
             }
-        },
-        include: {
-            model: Temper,
-            attributes: ['id', 'name'],
-            through: {
-                attributes: []
-            }
-        }
-    })
-    return dogsByName
-    }catch(error){
-        console.log('Error en controller getControllersCountries ' + error )
+        })
+        return dogsByName
+    } catch (error) {
+        console.log('Error en controller getControllersCountries ' + error)
     }
 }
 

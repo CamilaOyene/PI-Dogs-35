@@ -26,9 +26,17 @@ export default function Detail() {
                 <div className="Detail">
                     <h1>{dog.name}</h1>
                     <p>Id: {dog.id}</p>
-                    <h2>Temperamentos: {dog.tempers}</h2>
-                    <h2>Altura: {dog.height}</h2>
-                    <h2>Peso: {dog.weight}</h2>
+                    <h2>Temperamentos: </h2>
+                    {Array.isArray(dog.tempers) ?
+                    dog.tempers.map(t => {
+                        return (
+                            <p key={t.name}>{t.name}</p>
+                        )
+                    })
+                    :
+                    <p key={dog.tempers}>{dog.tempers}</p>}
+                    <h2>Altura: {dog.heightMin}-{dog.heightMax}</h2>
+                    <h2>Peso: {dog.weightMin}-{dog.weightMax}</h2>
                     <h2>Años de vida: {dog.life_span}</h2>
                     <div className="imageCountry">
                     <img src={dog.image} alt={dog.name} width='300' height='250'/>
