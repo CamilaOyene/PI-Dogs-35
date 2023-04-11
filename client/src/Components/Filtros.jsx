@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByTemper, filterCreated, getAllDogs, orderByAbc, orderByWeight } from "../redux/actions";
-
+import '../Style/CSS/Filtro.css'
 export default function Filtros({ setCurrentPage, currentDogs }) {
     const dispatch = useDispatch()
     const [orden, setOrden] = useState('')
@@ -45,7 +45,6 @@ export default function Filtros({ setCurrentPage, currentDogs }) {
 
     return (
         <div className="conteinerFiltros">
-            <h2>Filtros</h2>
             <div className="filterByTemper">
                 <label htmlFor="tempers">Temperamento: <select id='tempers' onChange={e=>handleFilterTemper(e)} >
                  <option value='all'>Todos</option>

@@ -30,7 +30,7 @@ export function getDogsByName(name) {
             console.log("error getDogsByName", error)
             return dispatch({
                 type: 'ERROR',
-                payload: error.response
+                payload: error.response.data
             })
         }
     }
@@ -48,7 +48,7 @@ export function getDogsById(id) {
             console.log("error getDogsById", error)
             return dispatch({
                 type: 'ERROR',
-                payload: error.response
+                payload: error.response.data
             })
         }
     }
@@ -74,7 +74,7 @@ export function getTempers() {
             console.log("error en get_tempers", error.response)
             return dispatch({
                 type: 'ERROR',
-                payload: error.response
+                payload: error.response.data
             })
         }
     }
@@ -117,5 +117,16 @@ export function filterByTemper(payload) {
     return {
         type: 'FILTER_BY_TEMPER',
         payload,
+    }
+}
+
+export function dogDeleted(id) {
+    return async function () {
+        try {
+            await axios.delete(`http://localhost:3001/dogs/delete/${id}`)
+        } catch (error) {
+            console.log(error.response)
+
+        }
     }
 }

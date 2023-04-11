@@ -7,7 +7,7 @@ import Cards from './Cards';
 import SearchBar from './SearchBar';
 import{ getAllDogs, getTempers } from '../redux/actions'
 import Filtros from './Filtros';
-
+import '../Style/CSS/Home.css'
 
 export default function Home() {
     const dispatch = useDispatch()
@@ -23,7 +23,7 @@ export default function Home() {
         setCurrentPage(pageNumber)
     }
 
-
+ 
     useEffect(()=>{
         dispatch(getAllDogs())
         dispatch(getTempers())
@@ -34,10 +34,10 @@ export default function Home() {
             <header className='headerDogs'>
                 <h1>Perros</h1>
             </header>
-            <nav>
+            <div className='nav'>
                 <Link to='/'><button>Atrás</button></Link>
                 <Link to='/post'><button>Crea una raza</button></Link>
-            </nav>
+            </div>
 
             <Filtros
             setCurrentPage={setCurrentPage}

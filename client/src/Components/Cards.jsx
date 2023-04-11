@@ -2,14 +2,17 @@ import React from "react";
 import Card from './Card';
 import Error from './Error';
 import NoMatches from "./NoMatches";
+import '../Style/CSS/Cards.css'
 
-export default function Cards({ currentDogs, error }) {
+export default function Cards({ currentDogs, error, setCurrentPage }) {
 
+    console.log('soy currentDogs', currentDogs)
     return (
         <div className="Cards">
             {error.length ? <Error error={error} />
                 :
                 typeof currentDogs === 'string' ?
+
                     <div>
                         <NoMatches />
                     </div>
@@ -25,6 +28,7 @@ export default function Cards({ currentDogs, error }) {
                                         weightMin={dog.weightMin}
                                         weightMax={dog.weightMax}
                                         id={dog.id}
+                                        createDb={dog.createDb ? dog.createDb : false}
                                     />
                                 </div>
                             )

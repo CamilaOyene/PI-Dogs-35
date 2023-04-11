@@ -1,0 +1,50 @@
+.Card {
+  background: #0f0c29; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #C6FFDD;
+  width: 20vw;
+  height: 75vh;
+  margin: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  
+}
+.Card:hover {
+  background-size: cover;
+  background-position: center;
+  transform: translateX(-20px);
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+.Card a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.Card a:visited {
+  text-decoration: none;
+  color: #ffffff;
+}
+.Card h2{
+  color:#C6FFDD;
+}
+.Card h3{
+  color:#C6FFDD;
+  padding:0px;
+}
+

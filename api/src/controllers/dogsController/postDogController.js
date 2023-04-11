@@ -16,7 +16,7 @@ const createDogDb = async (name, heightMin,heightMax, weightMin,weightMax, life_
     
     let temperament = await Temper.findAll({        //busca en la tabla Temper y devuelve el que coinsida con la clausula where
         where:{
-            id:tempers,
+            name:tempers,
         },attributes:['id','name']
     })
 

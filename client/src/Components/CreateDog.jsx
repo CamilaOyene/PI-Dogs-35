@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTempers, postDog } from '../redux/actions';
-import defaultImage from '../Style/Images/defaultImage/defaultImage.jpg'
+import defaultImage from '../Style/Images/defaultImage/defaultImage.jpeg'
+import '../Style/CSS/CreateDog.css'
 
 export default function CreateDog() {
     const dispatch = useDispatch()
@@ -53,16 +54,16 @@ export default function CreateDog() {
             errors.weightMax = 'Solo números'
         }
         if (input.heightMin > 50 || input.heightMin < 20) {
-            errors.heightMin = "Altura Minima entre 50 y 20 cm "
+            errors.heightMin = "Altura Minima entre 20y 50 cm "
         }
         if (input.heightMax > 90 || input.heightMax < 21) {
             errors.heightMax = "Altura Maxima entre 21 y 90 cm "
         }
-        if (input.weightMin > 15 || input.weightMin < 3) {
-            errors.weightMin = "Peso Minimo entre 3 y 15 kg "
+        if (input.weightMin > 40 || input.weightMin < 3) {
+            errors.weightMin = "Peso Minimo entre 3 y 40 kg "
         }
-        if (input.weightMax > 50 || input.weightMax < 4) {
-            errors.weightMax = "Peso Maximo entre 4 y 50 kg "
+        if (input.weightMax > 60 || input.weightMax < 4) {
+            errors.weightMax = "Peso Maximo entre 4 y 60 kg "
         }
         if (!input.life_span) {
             errors.life_span = 'Especificar años de vida'
@@ -90,18 +91,21 @@ export default function CreateDog() {
         }))
     }
 
+
     function handleSelectTemper(e) {
-        e.preventDefault()
-        if (e.target.value !== 'tempers') {
+        if (e.target.value !== 'all') {
             let filteredValue = input.tempers.find(temper => temper === e.target.value)
+
             if (!filteredValue) {
                 setInput({
                     ...input,
-                    tempers: [...input.tempers, e.target.value]
+                    tempers: [...input.tempers, e.target.value
+                    ]
                 })
                 setErrors(validations({
                     ...input,
-                    tempers: [...input.tempers, e.target.value]
+                    tempers: [...input.tempers,
+                    e.target.value]
                 }))
             }
         }
@@ -117,7 +121,7 @@ export default function CreateDog() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        if (input.name === "" || input.tempers === [] || input.image === "" || input.heightMin === 0 || input.heightMax === 0 || input.weightMin === 0 || input.weightMax === 0 || input.life_span === "") {
+        if (input.name === "" || input.tempers.length === 0 || input.image === "" || input.heightMin === 0 || input.heightMax === 0 || input.weightMin === 0 || input.weightMax === 0 || input.life_span === "") {
             return alert("Debe completar todos los campos")
         }
         dispatch(postDog(input))
@@ -137,7 +141,7 @@ export default function CreateDog() {
     }
     return (
         <div className="CreateDog">
-            <Link to='/home'><button id='backToHome'>Volver</button></Link>
+            <Link to='/home'><button className='backToHome'>Volver</button></Link>
             <h1>FORMULARIO DE CREACION DE RAZA</h1>
             <form className="form" onSubmit={(e) => handleSubmit(e)}>
                 <div>
@@ -186,7 +190,7 @@ export default function CreateDog() {
                             value={input.weightMax}
                             name='weightMax'
                             onChange={(e) => handleChange(e)} /></label>
-                            {
+                    {
                         !errors.weightMin ? null : <span>{errors.weightMin}</span>
                     }
                     {
@@ -207,11 +211,11 @@ export default function CreateDog() {
                 </div>
                 <div>
                     <label htmlFor="tempers">Temperamentos: <select id='tempers' onChange={e => handleSelectTemper(e)}>
-                        <option value='tempers' key='Seleccionar'>Seleccionar</option>
+                        <option value='all'>Seleccionar</option>
                         {
                             temper && temper.map(temper => {
                                 return (
-                                    <option key={temper.id}>{temper.name}</option>
+                                    <option key={temper.id} value={temper.name}>{temper.name}</option>
                                 )
                             })
                         }
@@ -221,10 +225,10 @@ export default function CreateDog() {
                     }
 
                     <ul>{
-                        input.tempers.map(temper => {
+                        input.tempers.map(temp => {
                             return (
-                                <li key={temper}>
-                                    {temper} <button key={temper} className="buttonTemper" value={temper} onClick={e => handleDeletTemper(e)}>X</button>
+                                <li key={temp}>
+                                    {temp} <button key={temp} className="buttonTemper" value={temp} onClick={e => handleDeletTemper(e)}>X</button>
                                 </li>
                             )
                         })
@@ -240,7 +244,7 @@ export default function CreateDog() {
                         name='image'
                         placeholder="Inserte URL de imagen"
                         onChange={(e) => handleChange(e)} /></label>
-                     {
+                    {
                         !errors.image ? null : <span>{errors.image}</span>
                     }
 

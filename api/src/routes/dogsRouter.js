@@ -1,14 +1,16 @@
-const {Router} = require("express");
+const { Router } = require("express");
 const dogsRouter = Router();
 const {
     getDetailHandler,
     getDogsHandler,
-    createDogsHandler
+    createDogsHandler,
+    deleteDogHandler
 } = require('../handler/dogsHandler');
 
 dogsRouter.get('/', getDogsHandler);
-dogsRouter.get('/:id',getDetailHandler);
-dogsRouter.post('/',createDogsHandler);
+dogsRouter.get('/:id', getDetailHandler);
+dogsRouter.post('/', createDogsHandler);
+dogsRouter.delete('/delete/:id', deleteDogHandler);
 
 
-module.exports= dogsRouter;
+module.exports = dogsRouter;

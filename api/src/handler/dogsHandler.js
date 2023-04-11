@@ -1,3 +1,4 @@
+const { dogForDelete } = require('../controllers/dogsController/deleteDogController.js');
 const { getDogById } = require('../controllers/dogsController/getDetailController.js')
 const { getAllDogs, searchName } = require('../controllers/dogsController/getDogsController.js');
 const { createDogDb } = require('../controllers/dogsController/postDogController.js');
@@ -51,9 +52,24 @@ const createDogsHandler = async (req, res) => {
         console.log('Error en createDogsHandler', error)
     }
 }
+const deleteDogHandler= async(req,res) =>{
+    const {id} = req.params;
+    try {
+        let dog = await dogForDelete(id);
+        if(!dog){
+            res.status(404).send('No esta disponible')
+        }else{
+            await dog.destroy();
+            res.status(200).send('Eliminación exitosa.')
+        }
+    } catch (error) {
+        console.log('error en deleteHandler',error)
+    }
+}
 
 module.exports = {
     getDetailHandler,
     getDogsHandler,
     createDogsHandler,
+    deleteDogHandler
 }

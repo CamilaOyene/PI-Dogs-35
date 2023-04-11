@@ -1,0 +1,13 @@
+.NoMatches {
+  background-color: #ffff;
+  width: 80%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #c6ffdd;
+  border-radius: 10px 60px;
+  padding: 30px;
+  text-align: center;
+}

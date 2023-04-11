@@ -1,0 +1,7 @@
+.Cards {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 98vw;
+    flex-wrap: wrap;
+  }

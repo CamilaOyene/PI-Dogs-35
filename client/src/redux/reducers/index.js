@@ -36,6 +36,7 @@ function orderByAbc(order, state) {
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'GET_DOGS':
+            console.log('soy GET_DOGS', action.payload)
             return {
                 ...state,
                 dogs: action.payload,
@@ -61,6 +62,7 @@ export default function rootReducer(state = initialState, action) {
                 details: [],
             }
         case 'GET_TEMPERS':
+            console.log('soy GET_TEMPERS',action.payload)
             return {
                 ...state,
                 tempers: action.payload,
@@ -70,7 +72,7 @@ export default function rootReducer(state = initialState, action) {
             let created = action.payload === 'createDb' ? state.allDogs.filter(dog => dog.createDb) : state.allDogs.filter(dog => !dog.createDb)
             return {
                 ...state,
-                dogs: action.payload === 'all' ? state.allDogs : created.length === 0 ? 'No se encuentran perros' : created,
+                dogs: action.payload === 'all' ? state.allDogs : created.length === 0 ? 'NoSeEncuentranPerros' : created,
                 errors:{}
             }
         case 'ORDER_BY_ABC':

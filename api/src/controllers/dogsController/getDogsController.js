@@ -28,7 +28,7 @@ const getDbDogs = async () => {
     let dogsInDb = await Dog.findAll({   //traigo los perros de la BD con su modelo Temper
         include: {
             model: Temper,
-            attributes: ['name'],
+            attributes: ['id','name'],
             through: {
                 attributes: []
             }
