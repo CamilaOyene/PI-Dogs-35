@@ -12,9 +12,13 @@ export default function Detail() {
     const navigate = useNavigate()
 
     function handleDelete() {
-        dispatch(dogDeleted(id))
-        alert('¡Eliminación exitosa!')
-        navigate('/home')
+      if(window.confirm('¿Seguro que deseas eliminar este perro?')){
+          dispatch(dogDeleted(id))
+          alert('¡Eliminación exitosa!')
+          navigate('/home')
+      }else{
+        return false
+      }
     }
 
 
@@ -50,7 +54,7 @@ export default function Detail() {
                         <h2>Altura: {dog.heightMin}-{dog.heightMax}</h2>
                         <h2>Peso: {dog.weightMin}-{dog.weightMax}</h2>
                         <h2>Años de vida: {dog.life_span}</h2>
-                        <div className="imageCountry">
+                        <div className="imageDog">
                             <img src={dog.image} alt={dog.name} width='300' height='250' />
                         </div>
                     </div>

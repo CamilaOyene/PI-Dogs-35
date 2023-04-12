@@ -8,7 +8,7 @@ export default function LandingPage(){
             <Link to='/home' className="bienvenidos">
                 <h1>Bienvenidos a la API de perros</h1>
             </Link>
-            <p> En ese sitio puede encontrar informacion sobre mas de 250 razas utilizando la api externa THEDOGAPI .</p>
+            <p> En este sitio puede encontrar informacion sobre mas de 250 razas utilizando la api externa THEDOGAPI .</p>
         </div>
     )
 }

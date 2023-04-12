@@ -14,6 +14,7 @@ export default function SearchBar(){
         e.preventDefault()
         if(!name){          //si busca sin escribir muestra un alert
             alert('Debe escribir un nombre')
+            return false
         }
         dispatch(getDogsByName(name))
         setName('')

@@ -36,7 +36,6 @@ function orderByAbc(order, state) {
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'GET_DOGS':
-            console.log('soy GET_DOGS', action.payload)
             return {
                 ...state,
                 dogs: action.payload,
@@ -56,13 +55,11 @@ export default function rootReducer(state = initialState, action) {
                 errors: {}
             }
         case 'CLEAN_DOG':
-            console.log(state.details)
             return {
                 ...state,
                 details: [],
             }
         case 'GET_TEMPERS':
-            console.log('soy GET_TEMPERS',action.payload)
             return {
                 ...state,
                 tempers: action.payload,

@@ -6,7 +6,6 @@ import '../Style/CSS/Cards.css'
 
 export default function Cards({ currentDogs, error, setCurrentPage }) {
 
-    console.log('soy currentDogs', currentDogs)
     return (
         <div className="Cards">
             {error.length ? <Error error={error} />

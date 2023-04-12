@@ -122,7 +122,10 @@ export default function CreateDog() {
     function handleSubmit(e) {
         e.preventDefault()
         if (input.name === "" || input.tempers.length === 0 || input.image === "" || input.heightMin === 0 || input.heightMax === 0 || input.weightMin === 0 || input.weightMax === 0 || input.life_span === "") {
-            return alert("Debe completar todos los campos")
+            return alert("Debe completar todos los campos .")
+        }
+        if(errors.name || errors.tempers || errors.image || errors.heightMin || errors.heightMax || errors.weightMin || errors.weightMax || errors.life_span){
+            return alert("Completar bien por favor :) .")
         }
         dispatch(postDog(input))
         alert("¡Creación exitosa!")
