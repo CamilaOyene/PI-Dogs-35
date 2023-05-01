@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import '../Style/CSS/Card.css'
 
-export default function Card({ id, name, image, tempers, createDb, weightMin, weightMax }) {
+export default function Card({ id, name, image, tempers, createDb, weightMin, weightMax, life_span}) {
 
 
     return (

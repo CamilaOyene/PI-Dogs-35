@@ -28,6 +28,7 @@ export default function Cards({ currentDogs, error, setCurrentPage }) {
                                         weightMax={dog.weightMax}
                                         id={dog.id}
                                         createDb={dog.createDb ? dog.createDb : false}
+                                        life_span={dog.life_span}
                                     />
                                 </div>
                             )
